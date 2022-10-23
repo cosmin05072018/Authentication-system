@@ -1,3 +1,8 @@
+<?php
+    require_once("connect.php");
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +21,13 @@
     <div class="forms">
         <div class="form login">
             <span class="title">Registration</span>
-            <form action="#" method="post">
+            <form action="dataProcessing.php" method="POST">
                 <div class="input-field">
-                    <input type="text" name="name" placeholder="Enter your name">
+                    <input type="text" name="firstName" placeholder="First Name">
+                    <i class="uil uil-user"></i>
+                </div>
+                <div class="input-field">
+                    <input type="text" name="lastName" placeholder="Last Name">
                     <i class="uil uil-user"></i>
                 </div>
                 <div class="input-field">
@@ -31,7 +40,7 @@
                     <i class="uil uil-eye-slash showHidePW"></i>
                 </div>
                 <div class="input-field">
-                    <input type="password" class="password" name="password" placeholder="Confirm your password">
+                    <input type="password" class="passwordConfirm" name="password" placeholder="Confirm your password">
                     <i class="uil uil-lock icon"></i>
                     <i class="uil uil-eye-slash showHidePW"></i>
                 </div>

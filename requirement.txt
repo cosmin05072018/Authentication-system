@@ -1,0 +1,26 @@
+Creeaza o baza de date cu o tabela pentru utilizatori (users) cu coloanele (id, first_name, last_name, email, password, remember_token)
+
+Pagini:
+
+Register.php
+
+            Un formular cu urmatoarele input-uri
+            First Name
+            Last Name
+            Email
+            Password
+            Confirm password
+            Toate input-urile sunt obligatorii, adresa de email trebuie sa fie unica, parola o criptam folosind password_hash().
+
+Login.php
+
+            Un formular pentru conectarea pe site ( adresa de email si parola ) + checkbox pentru remember me. Daca datele furnizate de utilizator sunt corecte ii setam sesiunea. 
+            Daca a bifat si checkbox-ul pentru remember me, generam un token pe care il setam in coloana remember_token si ii setam si un cookie cu el. Daca utilizatorul revine pe 
+            site verificam cookie-ul respectiv daca exista si daca corespunde unui utilizator, caz in care il conectam pe site fara sa fie nevoit sa foloseasca el pagina de login.
+
+Logout.php
+            Stergem sesiune, cookie, setam pe utilizator remember_token = null.
+
+
+Homepage.php
+            Afisam utilizatorului un mesaj simplu, eventual datele contului daca este logat sau daca nu, un mesaj simplu sa se conecteze.

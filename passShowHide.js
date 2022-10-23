@@ -1,8 +1,6 @@
 const container = document.querySelector('.container'),
       passShowHide = document.querySelectorAll('.showHidePW'),
-      pass= document.querySelectorAll('.password'),
-      signUp= document.querySelector('.signup-text'),
-      logIn= document.querySelector('.login-text');
+      pass= document.querySelectorAll('.password');
 
       passShowHide.forEach(icon =>
         icon.addEventListener('click', ()=>{

@@ -1,3 +1,7 @@
+<?php
+    require_once("connect.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,13 +21,13 @@
             <!-- LOGIN FORM -->
             <div class="form login">
                 <span class="title">Login</span>
-                <form action="#" method="post">
+                <form action="dataProcessing.php" method="post">
                     <div iv class="input-field">
                         <input type="email" name="email" placeholder="Enter your email adress">
                         <i class="uil uil-envelope"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" name="password" placeholder="Enter your password">
+                        <input type="password" class="passwo`rd" name="password" placeholder="Enter your password">
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePW"></i>
                     </div>
