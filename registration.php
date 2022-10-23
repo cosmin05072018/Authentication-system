@@ -1,5 +1,6 @@
 <?php
-    require_once("connect.php");
+    require_once('connect.php');
+    require_once('dataProcessing.php');
 ?>
 
 
@@ -40,10 +41,11 @@
                     <i class="uil uil-eye-slash showHidePW"></i>
                 </div>
                 <div class="input-field">
-                    <input type="password" class="passwordConfirm" name="password" placeholder="Confirm your password">
+                    <input type="password" class="password" name="passwordConfirm" placeholder="Confirm your password">
                     <i class="uil uil-lock icon"></i>
                     <i class="uil uil-eye-slash showHidePW"></i>
                 </div>
+                <?php  validate()?>
                 <div class="input-field button">
                         <input type="submit" name="submit" value="Register">
                     </div>
