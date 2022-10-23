@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f482409c;
+}
+
+.container {
+  border-radius: 10px;
+  position: relative;
+  max-width: 430px;
+  width: 100%;
+  background: #fff;
+  box-shadow: rgba(50, 50, 93, 0.911) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.808) 0px 30px 60px -30px;
+}
+
+.container .form {
+  padding: 35px;
+}
+
+.container .form .title {
+  position: relative;
+  font-size: 27px;
+  font-weight: 600;
+}
+
+.form .title::before {
+  margin-top: 10px;
+  content: "";
+  background-color: #f482409c;
+  height: 4px;
+  width: 28px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-radius: 25px;
+}
+
+.form .input-field {
+  margin-top: 30px;
+  position: relative;
+  height: 50px;
+  width: 100%;
+}
+
+.input-field input {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  padding: 0 35px;
+  border: none;
+  outline: none;
+  border-bottom: 3px solid #ccc;
+  border-top: 2px solid transparent;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.input-field input:focus:valid {
+  border-bottom-color: #f482409c;
+}
+
+.input-field i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 23px;
+  transition: all 0.3s ease;
+}
+
+.input-field i.icon {
+  left: 0;
+}
+
+.input-field i.showHidePW {
+  right: 0;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.input-field input:focus:valid ~ i {
+  color: #f482409c;
+}
+
+.form .checkbox-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.checkbox-text .checkbox-content {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-content input {
+  accent-color: #40acf442;
+  margin: 0 8px -2px 4px;
+}
+
+.form .text {
+  font-size: 14px;
+}
+
+.form a {
+  text-decoration: none;
+  color: #002dc2;
+  font-weight: 500;
+}
+
+.form a:hover {
+  text-decoration: underline;
+}
+
+.form .button {
+    margin-top: 35px;
+}
+
+.form .button input{
+    border: none;
+    background-color: #f482409c;
+    border-radius: 10px;
+    color: #fff;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.button input:hover{
+    background-color: #f48240;
+}
+
+.form .login-signup{
+    margin-top: 30px;
+    text-align: center;
+}
