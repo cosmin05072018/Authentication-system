@@ -1,91 +1,41 @@
 <?php
+if (isset($_POST['submit'])) {
+    require_once('connect.php');
 
 
-function validate()
-{
-    $db = new mysqli('localhost', 'root', '', 'myprojects');
-    // if(empty($_POST['firstName']) && empty($_POST['lastName']) && empty($_POST['email']) && empty($_POST['password'])){
-    //     echo "<p>Required Fields!</p>";   
-    // }elseif($_POST['passwordConfirm'] !== $_POST['password']){
-    //     echo "<p>The password is not the same!</p>";
-    // }else{
-    // $fName = $_POST['firstName'];
-    // $lName = $_POST['lastName'];
-    // $email = $_POST['email'];
-    // $password = $_POST['password'];
-    // $passHash= password_hash($password, PASSWORD_DEFAULT);
+    $fName = $_POST['firstName'];
+    $lName = $_POST['lastName'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['passwordConfirm'];
 
-
-
-    // $db->query("INSERT INTO users SET 
-    // first_name = '$fName',
-    // last_name = '$lName',
-    // email = '$email',
-    // password = '$passHash'
-    // ");
-
-    // header("Location: login.php");
-    // }
-
-    if (isset($_POST['submit'])) {
-        //check first_name
-        if(empty($_POST['firstName']) || $_POST['firstName'] < 3){
-            $errorLname='The field is required and must contain at least 3 characters!';
+    if (empty($fName) || empty($lName) || empty($email) || empty($password) || empty($confirmPassword)) {
+        header("Location: registration.php?signup=empty");
+        exit();
+    } else {
+        if (!preg_match("/^[a-zA-Z]*$/", $fName) || !preg_match("/^[a-zA-Z]*$/", $lName)) {
+            header("Location: registration.php?signup=char");
+            exit();
+        } else {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                header("Location: registration.php?signup=email&firstName=$fName&lastName=$lname");
+                exit();
+            }elseif($_POST['password'] !== $_POST['passwordConfirm']){
+                header("Location: registration.php?signup=passwordNoMatches&firstName=$fName&lastName=$lname");
+                exit();
+            } 
+            
+            else {
+                $passHash = password_hash($password, PASSWORD_DEFAULT);
+                $db = new mysqli('localhost', 'root', '', 'myprojects');
+                $db->query("INSERT INTO users SET 
+                first_name = '$fName',
+                last_name = '$lName',
+                email = '$email',
+                password = '$passHash'
+                ");
+                header("Location: login.php?signup=succes");
+            }
         }
-        //check last_name
-
-        //check email
-
-        //check password & confirm password
     }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function validate()
-// {
-//     $db = new mysqli('localhost', 'root', '', 'myprojects');
-//     if (!empty($_POST['firstName']) && !empty($_POST['lastName']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-//         $fName = $_POST['firstName'];
-//         $lName = $_POST['lastName'];
-//         $email = $_POST['email'];
-//         $password = $_POST['password'];
-//         $passHash = password_hash($password, PASSWORD_DEFAULT);
-//         $db->query("INSERT INTO users SET 
-//     first_name = '$fName',
-//     last_name = '$lName',
-//     email = '$email',
-//     password = '$passHash'
-//     ");
-
-//         header("Location: login.php");
-//     } elseif (empty($_POST['firstName']) && empty($_POST['lastName']) && empty($_POST['email']) && empty($_POST['password'])) {
-//         echo "<p>Required Fields!</p>";
-//         //header("Location: registration.php");
-//     }
-// }
+}
