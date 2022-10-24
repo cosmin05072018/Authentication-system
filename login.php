@@ -27,7 +27,7 @@
                         <i class="uil uil-envelope"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="passwo`rd" name="password" placeholder="Enter your password">
+                        <input type="password" class="password" name="password" placeholder="Enter your password">
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePW"></i>
                     </div>
