@@ -38,7 +38,7 @@ require_once('dataProcessing.php');
 
                 if (isset($_GET['lastName'])) {
                     echo    '<div class="input-field">
-                                <input type="text" name="lastName" placeholder="Last Name" value='.$_GET['firstName'].'>
+                                <input type="text" name="lastName" placeholder="Last Name" value='.$_GET['lastName'].'>
                                 <i class="uil uil-user"></i>
                             </div>';
                 }else{

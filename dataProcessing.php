@@ -23,9 +23,7 @@ if (isset($_POST['submit'])) {
             }elseif($_POST['password'] !== $_POST['passwordConfirm']){
                 header("Location: registration.php?signup=passwordNoMatches&firstName=$fName&lastName=$lname");
                 exit();
-            } 
-            
-            else {
+            } else {
                 $passHash = password_hash($password, PASSWORD_DEFAULT);
                 $db = new mysqli('localhost', 'root', '', 'myprojects');
                 $db->query("INSERT INTO users SET 

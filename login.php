@@ -1,5 +1,6 @@
 <?php
-    require_once("connect.php");
+require_once("connect.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -21,11 +22,20 @@
             <!-- LOGIN FORM -->
             <div class="form login">
                 <span class="title">Login</span>
-                <form action="dataProcessing.php" method="post">
-                    <div iv class="input-field">
-                        <input type="email" name="email" placeholder="Enter your email adress">
-                        <i class="uil uil-envelope"></i>
-                    </div>
+                <form action="dataValidate.php" method="POST">
+                    <?php 
+                     if (isset($_GET['email'])) {
+                        echo    '<div  class="input-field">
+                                    <input type="text" name="email" placeholder="Enter your email adress" value ='.$_GET['email'].'>
+                                    <i class="uil uil-envelope"></i>
+                                </div>';
+                    }else{
+                        echo    '<div class="input-field">
+                                    <input type="text" name="email" placeholder="Enter your email adress">
+                                    <i class="uil uil-envelope"></i>
+                                </div>';
+                    }
+                    ?>
                     <div class="input-field">
                         <input type="password" class="password" name="password" placeholder="Enter your password">
                         <i class="uil uil-lock icon"></i>
@@ -48,12 +58,36 @@
                         <a href="registration.php" class="text signup-link">SignUp Now</a>
                     </span>
                 </div>
+                <?php 
+                if (!isset($_GET['signin'])) {
+                    exit();
+                }else{
+                    $siginCheck = $_GET['signin'];
+                    if ($siginCheck === "inputRequired") {
+                        echo '<p class="error">The inputs is required</p>  <i class="uil uil-times-circle"></i>';
+                        exit();
+                    }elseif ($siginCheck === "emailError") {
+                        echo '<p class="error">The email is invalid.</p>  <i class="uil uil-times-circle"></i>';
+                        exit();
+                    }elseif ($siginCheck === "accountNotExist") {
+                        echo '<p class="error">The account does not exist.</p>  <i class="uil uil-times-circle"></i>';
+                        exit();
+                    }elseif ($siginCheck ==="incorrectly"){
+                        echo '<p class="error">The account or password was entered incorrectly!</p>  <i class="uil uil-times-circle"></i>';
+                        exit();
+                    }
+                    elseif ($siginCheck === "succes") {
+                        echo '<p class="succes">Login succes!</p>  <i class="uil uil-times-circle"></i>';
+                        exit();
+                    }
+                }
+                ?>
             </div>
             <!-- ---------------- -->
 
 
-         
-    <script src="passShowHide.js"></script>
+
+            <script src="passShowHide.js"></script>
 </body>
 
 </html>
