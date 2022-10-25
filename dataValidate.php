@@ -1,6 +1,11 @@
 <?php
+
+//set cookie and session
 session_start();
 if(isset($_POST)){
+    if(isset($_POST['remember_me'])){
+        setcookie('email', $_POST['email'], time() +3600);
+    }
     $_SESSION['email'] = $_POST['email'];
 }
 require_once("connect.php");

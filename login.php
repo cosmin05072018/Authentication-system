@@ -2,9 +2,6 @@
 require_once("connect.php");
 
 
-// if(isset($_POST)){
-//     $_SESSION['email'] = $_POST['email'];
-// }
 
 ?>
 
