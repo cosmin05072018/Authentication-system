@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&family=Poppins:wght@300;400;500;600;700&display=swap");
 
 body {
-	font-family: 'Varela Round', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .form-control {
 	box-shadow: none;		
@@ -165,7 +165,7 @@ body {
 	position: relative;
 	top: 1px;
 }
-@media (min-width: 1200px){
+/* @media (min-width: 1200px){
 	.form-inline .input-group {
 		width: 300px;
 		margin-left: 30px;
@@ -184,4 +184,4 @@ body {
 	.navbar .input-group {
 		width: 100%;
 	}
-}
+} */

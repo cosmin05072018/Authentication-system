@@ -56,7 +56,8 @@ require_once("connect.php");
                 <div class="login-signup">
                     <span class="text">Don't have an account?
                         <a href="registration.php" class="text signup-link">SignUp Now</a>
-                    </span>
+                    </span> <br>
+                    <span class="text"><a href="home.php" class="text">Go to Home</a></span>
                 </div>
                 <?php 
                 if (!isset($_GET['signin'])) {

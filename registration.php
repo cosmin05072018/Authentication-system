@@ -72,7 +72,8 @@ require_once('dataProcessing.php');
                 <div class="login-signup">
                     <span class="text">Do you have an account?
                         <a href="login.php" class="text login-link"> LogIn Now</a>
-                    </span>
+                    </span><br>
+                    <span class="text"><a href="home.php" class="text">Go to Home</a></span>
                 </div>
 
                 <?php
