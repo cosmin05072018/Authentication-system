@@ -1,10 +1,16 @@
 <?php
-
+require_once('connect.php');
 //set cookie and session
 session_start();
 if(isset($_POST)){
     if(isset($_POST['remember_me'])){
-        setcookie('email', $_POST['email'], time() +3600);
+        $token=uniqid();
+        setcookie('token', $token, time() +3600, '/');
+        $db = new mysqli('localhost', 'root', '', 'myprojects');
+                $db->query("UPDATE users SET 
+                remember_token = '$token'
+                WHERE email='$_POST[email] '
+                ");
     }
     $_SESSION['email'] = $_POST['email'];
 }
@@ -41,3 +47,7 @@ if(isset($_POST['email'])){
     }
 }
 
+
+
+
+        
