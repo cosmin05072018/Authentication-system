@@ -102,7 +102,15 @@ body {
 	color: #fff;
 	background: #33cabb !important;
 	border: none;
+  margin-right: 10px;
 }	
+
+
+.navbar .logout-btn{
+  background-color: rgba(255, 22, 22, 0.521);
+  color: #fff;
+  border-radius: 5px;
+}
 .navbar .btn-primary:hover, .navbar .btn-primary:focus {		
 	color: #fff;
 	background: #31bfb1 !important;

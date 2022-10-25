@@ -1,6 +1,11 @@
 <?php
 require_once("connect.php");
 
+
+// if(isset($_POST)){
+//     $_SESSION['email'] = $_POST['email'];
+// }
+
 ?>
 
 <!DOCTYPE html>
@@ -23,13 +28,13 @@ require_once("connect.php");
             <div class="form login">
                 <span class="title">Login</span>
                 <form action="dataValidate.php" method="POST">
-                    <?php 
-                     if (isset($_GET['email'])) {
+                    <?php
+                    if (isset($_GET['email'])) {
                         echo    '<div  class="input-field">
-                                    <input type="text" name="email" placeholder="Enter your email adress" value ='.$_GET['email'].'>
+                                    <input type="text" name="email" placeholder="Enter your email adress" value =' . $_GET['email'] . '>
                                     <i class="uil uil-envelope"></i>
                                 </div>';
-                    }else{
+                    } else {
                         echo    '<div class="input-field">
                                     <input type="text" name="email" placeholder="Enter your email adress">
                                     <i class="uil uil-envelope"></i>
@@ -59,25 +64,26 @@ require_once("connect.php");
                     </span> <br>
                     <span class="text"><a href="home.php" class="text">Go to Home</a></span>
                 </div>
-                <?php 
+                <script src="passShowHide.js"></script>
+
+                <?php
                 if (!isset($_GET['signin'])) {
                     exit();
-                }else{
+                } else {
                     $siginCheck = $_GET['signin'];
                     if ($siginCheck === "inputRequired") {
                         echo '<p class="error">The inputs is required</p>  <i class="uil uil-times-circle"></i>';
                         exit();
-                    }elseif ($siginCheck === "emailError") {
+                    } elseif ($siginCheck === "emailError") {
                         echo '<p class="error">The email is invalid.</p>  <i class="uil uil-times-circle"></i>';
                         exit();
-                    }elseif ($siginCheck === "accountNotExist") {
+                    } elseif ($siginCheck === "accountNotExist") {
                         echo '<p class="error">The account does not exist.</p>  <i class="uil uil-times-circle"></i>';
                         exit();
-                    }elseif ($siginCheck ==="incorrectly"){
+                    } elseif ($siginCheck === "incorrectly") {
                         echo '<p class="error">The account or password was entered incorrectly!</p>  <i class="uil uil-times-circle"></i>';
                         exit();
-                    }
-                    elseif ($siginCheck === "succes") {
+                    } elseif ($siginCheck === "succes") {
                         echo '<p class="succes">Login succes!</p>  <i class="uil uil-times-circle"></i>';
                         exit();
                     }
@@ -88,7 +94,6 @@ require_once("connect.php");
 
 
 
-            <script src="passShowHide.js"></script>
 </body>
 
 </html>

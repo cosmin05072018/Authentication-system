@@ -1,6 +1,8 @@
 <?php
-
-
+session_start();
+if(isset($_POST)){
+    $_SESSION['email'] = $_POST['email'];
+}
 require_once("connect.php");
 $emailAdress = $_POST['email'];
 $password = $_POST['password'];
@@ -21,7 +23,7 @@ if(isset($_POST['email'])){
             exit();
         } elseif(mysqli_num_rows($query) == 1){
             if(password_verify( $_POST['password'], $row['password'])){
-                header("Location: login.php?signin=succes");
+                header("Location: home.php?signin=succes");
             exit();
             }
             else{

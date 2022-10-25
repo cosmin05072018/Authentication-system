@@ -23,31 +23,31 @@ require_once('dataProcessing.php');
             <div class="form login">
                 <span class="title">Registration</span>
                 <form action="dataProcessing.php" method="POST">
-                <?php
-                if (isset($_GET['firstName'])) {
-                    echo    '<div class="input-field">
-                                <input type="text" name="firstName" placeholder="First Name" value='.$_GET['firstName'].'>
+                    <?php
+                    if (isset($_GET['firstName'])) {
+                        echo    '<div class="input-field">
+                                <input type="text" name="firstName" placeholder="First Name" value=' . $_GET['firstName'] . '>
                                 <i class="uil uil-user"></i>
                             </div>';
-                }else{
-                    echo    '<div class="input-field">
+                    } else {
+                        echo    '<div class="input-field">
                                 <input type="text" name="firstName" placeholder="First Name">
                                 <i class="uil uil-user"></i>
                             </div>';
-                }
+                    }
 
-                if (isset($_GET['lastName'])) {
-                    echo    '<div class="input-field">
-                                <input type="text" name="lastName" placeholder="Last Name" value='.$_GET['lastName'].'>
+                    if (isset($_GET['lastName'])) {
+                        echo    '<div class="input-field">
+                                <input type="text" name="lastName" placeholder="Last Name" value=' . $_GET['lastName'] . '>
                                 <i class="uil uil-user"></i>
                             </div>';
-                }else{
-                    echo    '<div class="input-field">
+                    } else {
+                        echo    '<div class="input-field">
                                 <input type="text" name="lastName" placeholder="Last Name" > 
                                 <i class="uil uil-user"></i>
                             </div>';
-                }
-                ?>
+                    }
+                    ?>
                     <div class="input-field">
                         <input type="text" name="email" placeholder="Enter your email adress">
                         <i class="uil uil-envelope"></i>
@@ -75,7 +75,7 @@ require_once('dataProcessing.php');
                     </span><br>
                     <span class="text"><a href="home.php" class="text">Go to Home</a></span>
                 </div>
-
+                <script src="passShowHide.js"></script>
                 <?php
                 if (!isset($_GET['signup'])) {
                     exit();
@@ -90,12 +90,10 @@ require_once('dataProcessing.php');
                     } elseif ($signupCheck === "email") {
                         echo '<p class="error">The email is invalid.</p>  <i class="uil uil-times-circle"></i>';
                         exit();
-                    }
-                    elseif ($signupCheck === "passwordNoMatches") {
+                    } elseif ($signupCheck === "passwordNoMatches") {
                         echo '<p class="error">Passwords do not match.</p>  <i class="uil uil-times-circle"></i>';
                         exit();
-                    }
-                    elseif($signupCheck === "succes"){
+                    } elseif ($signupCheck === "succes") {
                         echo '<p class="succes">You have successfully created your account!</p>  <i class="uil uil-check-circle"></i>';
                         exit();
                     }
@@ -107,7 +105,7 @@ require_once('dataProcessing.php');
 
     <!-- ---------------- -->
 
-    <script src="passShowHide.js"></script>
+
 
 </body>
 

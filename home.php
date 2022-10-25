@@ -1,5 +1,7 @@
 <?php
-require_once("connect.php")
+require_once("connect.php");
+
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +10,7 @@ require_once("connect.php")
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bootstrap Navbar Dropdown Login and Signup Form with Social Buttons</title>
+    <title>HomePage</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -31,7 +33,7 @@ $(document).on("click", ".action-buttons .dropdown-menu", function(e){
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Collection of nav links, forms, and other content for toggling -->
-        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+        <!-- <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
             <div class="navbar-nav">
                 <a href="#" class="nav-item nav-link">Home</a>
                 <a href="#" class="nav-item nav-link">About</a>
@@ -57,18 +59,43 @@ $(document).on("click", ".action-buttons .dropdown-menu", function(e){
                         </span>
                     </div>
                 </div>
-            </form>
-            <div class="navbar-nav ml-auto action-buttons">
-                <div class="nav-item dropdown">
-                    <a href="registration.php"  class="nav-link dropdown-toggle mr-4">Registration</a>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="login.php" class="btn btn-primary dropdown-toggle sign-up-btn">Log In</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+            </form> -->
 
+            <?php 
+            $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+            if(!$email){
+                echo '
+              
+                <div class="navbar-nav ml-auto action-buttons">
+                <p class="nav-item nav-link">You are not connected...</p>
+                <div class="nav-item">
+                <a href="registration.php"  class="nav-link mr-4">Registration</a>
+            </div>
+            <div class="nav-item">
+                <a href="login.php" class="btn btn-primary sign-up-btn">Log In</a>
+            </div>
+            </div>';
+            }else{
+                echo'
+                <div class="navbar-nav ml-auto action-buttons">
+                <p class="nav-item nav-link">Hello, '.$_SESSION['email'].'</p>
+                <a href="logout.php" class="logout-btn">Logout</a>
+                </div>
+                ';
+            }
+            ?>
+            <!-- <div class="navbar-nav ml-auto action-buttons">
+                <div class="nav-item">
+                    <a href="registration.php"  class="nav-link mr-4">Registration</a>
+                </div>
+                <div class="nav-item">
+                    <a href="login.php" class="btn btn-primary sign-up-btn">Log In</a>
+                </div>
+                <a href="logout.php" class="logout-btn">Logout</a>
+            </div> -->
+        </div>
+       
+    </nav>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
