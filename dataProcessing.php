@@ -8,9 +8,11 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['passwordConfirm'];
+    $query = $db->query("SELECT email FROM users WHERE email = '$email'");
+    $row = $query->fetch_array();
 
     if (empty($fName) || empty($lName) || empty($email) || empty($password) || empty($confirmPassword)) {
-        header("Location: registration.php?signup=empty");
+        header("Location: registration.php?signup=empty&firstName=$fName&lastName=$lname");
         exit();
     } else {
         if (!preg_match("/^[a-zA-Z]*$/", $fName) || !preg_match("/^[a-zA-Z]*$/", $lName)) {
@@ -20,8 +22,11 @@ if (isset($_POST['submit'])) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 header("Location: registration.php?signup=email&firstName=$fName&lastName=$lname");
                 exit();
-            }elseif($_POST['password'] !== $_POST['passwordConfirm']){
+            } elseif ($_POST['password'] !== $_POST['passwordConfirm']) {
                 header("Location: registration.php?signup=passwordNoMatches&firstName=$fName&lastName=$lname");
+                exit();
+            } elseif (mysqli_num_rows($query) >= 1) {
+                header("Location: registration.php?signup=alreadyExists&firstName=$fName&lastName=$lname");
                 exit();
             } else {
                 $passHash = password_hash($password, PASSWORD_DEFAULT);

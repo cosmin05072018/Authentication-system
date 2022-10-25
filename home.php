@@ -74,7 +74,7 @@ $(document).on("click", ".action-buttons .dropdown-menu", function(e){
                 <div class="navbar-nav ml-auto action-buttons">
                 <p class="nav-item nav-link">You are not connected...</p>
                 <div class="nav-item">
-                <a href="registration.php"  class="nav-link mr-4">Registration</a>
+                <a href="registration.php"  class="btn btn-primary sign-up-btn">Registration</a>
             </div>
             <div class="nav-item">
                 <a href="login.php" class="btn btn-primary sign-up-btn">Log In</a>

@@ -17,6 +17,7 @@ if(isset($_POST)){
 require_once("connect.php");
 $emailAdress = $_POST['email'];
 $password = $_POST['password'];
+$lName = $_POST['lastName'];
 //verificam dupa mail
 if(isset($_POST['email'])){
     $query= $db->query("SELECT * FROM users WHERE email = '$emailAdress'");

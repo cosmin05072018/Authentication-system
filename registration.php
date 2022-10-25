@@ -82,19 +82,47 @@ require_once('dataProcessing.php');
                 } else {
                     $signupCheck = $_GET['signup'];
                     if ($signupCheck === "empty") {
-                        echo '<p class="error">The inputs is required</p>  <i class="uil uil-times-circle"></i>';
+                        echo '
+                        <div class=message>
+                        <p class="error">The inputs is required <i class="uil uil-times-circle"></i></p>  
+                        </div>
+                        ';
                         exit();
                     } elseif ($signupCheck === "char") {
-                        echo '<p class="error">The first or last name is invalid.</p>  <i class="uil uil-times-circle"></i>';
+                        echo '
+                        <div class=message>
+                        <p class="error">The first or last name is invalid.  <i class="uil uil-times-circle"></i></p> 
+                        </div>
+                        ';
                         exit();
                     } elseif ($signupCheck === "email") {
-                        echo '<p class="error">The email is invalid.</p>  <i class="uil uil-times-circle"></i>';
+                        echo '
+                        <div class=message>
+                        <p class="error">The email is invalid. <i class="uil uil-times-circle"></i></p>  
+                        </div>
+                        ';
                         exit();
                     } elseif ($signupCheck === "passwordNoMatches") {
-                        echo '<p class="error">Passwords do not match.</p>  <i class="uil uil-times-circle"></i>';
+                        echo '
+                        <div class=message>
+                        <p class="error">Passwords do not match.<i class="uil uil-times-circle"></i></p> 
+                        </div>
+                        ';
                         exit();
-                    } elseif ($signupCheck === "succes") {
-                        echo '<p class="succes">You have successfully created your account!</p>  <i class="uil uil-check-circle"></i>';
+                    }elseif($signupCheck === "alreadyExists"){
+                        echo '
+                        <div class=message>
+                        <p class="error">This account already exists! <i class="uil uil-check-circle"></i></p>  
+                        </div>
+                        ';
+                        exit();
+                    }
+                     elseif ($signupCheck === "succes") {
+                        echo '
+                        <div class=message>
+                        <p class="succes">You have successfully created your account! <i class="uil uil-check-circle"></i></p>  
+                        </div>
+                        ';
                         exit();
                     }
                 }

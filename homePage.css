@@ -36,6 +36,7 @@ body {
 }
 .navbar a {
 	color: #888;
+	background-color: #33cabb;
 	font-size: 15px;
 }
 .search-box {
@@ -110,6 +111,7 @@ body {
   background-color: rgba(255, 22, 22, 0.521);
   color: #fff;
   border-radius: 5px;
+  height: 20%;
 }
 .navbar .btn-primary:hover, .navbar .btn-primary:focus {		
 	color: #fff;
