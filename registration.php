@@ -1,8 +1,4 @@
-<?php
-require_once('connect.php');
-require_once('dataProcessing.php');
-?>
-
+<?php require_once("dataProcessing.php") ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,12 +13,11 @@ require_once('dataProcessing.php');
 </head>
 
 <body>
-    <!-- REGISTRATION FORM -->
     <div class="container">
         <div class="forms">
             <div class="form login">
                 <span class="title">Registration</span>
-                <form action="dataProcessing.php" method="POST">
+                <form action="" method="POST">
                     <?php
                     if (isset($_GET['firstName'])) {
                         echo    '<div class="input-field">
@@ -66,14 +61,12 @@ require_once('dataProcessing.php');
                     <div class="input-field button">
                         <input type="submit" name="submit" value="Register">
                     </div>
-
                 </form>
-
                 <div class="login-signup">
                     <span class="text">Do you have an account?
                         <a href="login.php" class="text login-link"> LogIn Now</a>
                     </span><br>
-                    <span class="text"><a href="home.php" class="text">Go to Home</a></span>
+                    <span class="text"><a href="index.php" class="text">Go to Home</a></span>
                 </div>
                 <script src="passShowHide.js"></script>
                 <?php
@@ -109,15 +102,14 @@ require_once('dataProcessing.php');
                         </div>
                         ';
                         exit();
-                    }elseif($signupCheck === "alreadyExists"){
+                    } elseif ($signupCheck === "alreadyExists") {
                         echo '
                         <div class=message>
-                        <p class="error">This account already exists! <i class="uil uil-check-circle"></i></p>  
+                        <p class="error">This account already exists! <i class="uil uil-times-circle"></i></i></p>  
                         </div>
                         ';
                         exit();
-                    }
-                     elseif ($signupCheck === "succes") {
+                    } elseif ($signupCheck === "succes") {
                         echo '
                         <div class=message>
                         <p class="succes">You have successfully created your account! <i class="uil uil-check-circle"></i></p>  
@@ -130,11 +122,6 @@ require_once('dataProcessing.php');
             </div>
         </div>
     </div>
-
-    <!-- ---------------- -->
-
-
-
 </body>
 
 </html>
