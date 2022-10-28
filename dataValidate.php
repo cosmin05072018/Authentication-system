@@ -13,10 +13,10 @@ if (isset($_POST['email'])) {
         if (!filter_var($emailAdress, FILTER_VALIDATE_EMAIL)) {
             header("Location: login.php?signin=emailError&email=$emailAdress");
             exit();
-        } elseif (mysqli_num_rows($query) == 0) {
+        } elseif ( $query->num_rows  == 0) {
             header("Location: login.php?signin=accountNotExist&email=$emailAdress");
             exit();
-        } elseif (mysqli_num_rows($query) == 1) {
+        } elseif ( $query->num_rows == 1) {
             if (password_verify($_POST['password'], $row['password'])) {
                 header("Location: index.php?signin=succes");
                 $_SESSION['email'] = $_POST['email'];

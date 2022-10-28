@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     $confirmPassword = $_POST['passwordConfirm'];
     $query = $db->query("SELECT email FROM users WHERE email = '" . $db->real_escape_string($email) . "'");
     $row = $query->fetch_assoc();
-    if (mysqli_num_rows($query) >= 1) {
+    if ($query->num_rows >= 1) {
         header("Location: registration.php?signup=alreadyExists&firstName=$fName&lastName=$lName");
         exit();
     } elseif (empty($fName) || empty($lName) || empty($email) || empty($password) || empty($confirmPassword)) {
