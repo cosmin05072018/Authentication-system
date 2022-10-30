@@ -17,7 +17,7 @@ if(isset($_POST['email'])){
         $message['email'] = 'succes';
         $code=rand(1111, 9999);
         $db->query("UPDATE users SET reset_password_token = '$code' WHERE email = '$email'"); 
-        $_SESSION['user'] = $_POST['email'];
+        $_SESSION['email'] = $_POST['email'];
         header("Location: checkCode.php");
     }
 }

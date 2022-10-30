@@ -5,7 +5,7 @@ $message=[];
 
 if(isset($_POST['verifyCode'])){
     $code = $_POST['verifyCode'];
-    $query = $db->query("SELECT reset_password_token FROM users WHERE email = '$_SESSION[user]'");
+    $query = $db->query("SELECT reset_password_token FROM users WHERE email = '$_SESSION[email]'");
     $row= $query->fetch_assoc();
     if(!$code){
         $message['code'] = 'Input required';
