@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php require_once 'checkSession.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,8 +20,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <?php
-        $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
-        if (!$email) { ?>
+        $user = isset($_SESSION['user']) ? $_SESSION['user'] : '';
+        if (!$user) { ?>
             <div class="navbar-nav ml-auto action-buttons">
                 <p class="nav-item nav-link">You are not connected...</p>
                 <div class="nav-item">
@@ -32,8 +32,8 @@
                 </div>
             </div>
         <?php } else {?>
-            <div class="navbar-nav ml-auto action-buttons"> 
-                <p class="nav-item nav-link">Hello, "<?= $_SESSION['email'] ?>"</p>
+            <div class="navbar-nav ml-auto action-buttons">
+                <p class="nav-item nav-link">Hello, "<?= $user['first_name']; ?> <?= $user['last_name']; ?>"</p>
                 <a href="logout.php" class="logout-btn">Logout</a>
             </div>
         <?php } ?>

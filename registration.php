@@ -1,5 +1,9 @@
-<?php require_once("dataProcessing.php") ?>
+<?php
+require_once 'checkSession.php';
+require_once 'checkLoggedIn.php';
+require_once "dataProcessing.php";
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,115 +17,75 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="forms">
-            <div class="form login">
-                <span class="title">Registration</span>
-                <form action="" method="POST">
-                    <?php
-                    if (isset($_GET['firstName'])) {
-                        echo    '<div class="input-field">
-                                <input type="text" name="firstName" placeholder="First Name" value=' . $_GET['firstName'] . '>
-                                <i class="uil uil-user"></i>
-                            </div>';
-                    } else {
-                        echo    '<div class="input-field">
-                                <input type="text" name="firstName" placeholder="First Name">
-                                <i class="uil uil-user"></i>
-                            </div>';
-                    }
+<div class="container">
+    <div class="forms">
+        <div class="form login">
+            <span class="title">Registration</span>
+            <form action="" method="POST">
+                <div class="input-field">
+                    <input type="text" name="firstName" placeholder="First Name"
+                           value="<?= isset($_POST['firstName']) ? $_POST['firstName'] : ''; ?>"/>
+                    <i class="uil uil-user"></i>
+                </div>
+                <?php if(isset($errors['first_name'])): ?>
+                    <div class="message">
+                        <p class="error"><?= $errors['first_name']; ?></p>
+                    </div>
+                <?php endif; ?>
+                <div class="input-field">
+                    <input type="text" name="lastName" placeholder="Last Name"
+                           value="<?= isset($_POST['lastName']) ? $_POST['lastName'] : ''; ?>">
+                    <i class="uil uil-user"></i>
+                </div>
+                <?php if(isset($errors['last_name'])): ?>
+                    <div class="message">
+                        <p class="error"><?= $errors['last_name']; ?></p>
+                    </div>
+                <?php endif; ?>
+                <div class="input-field">
+                    <input type="text" name="email" placeholder="Enter your email address">
+                    <i class="uil uil-envelope"></i>
+                </div>
+                <?php if(isset($errors['email'])): ?>
+                    <div class="message">
+                        <p class="error"><?= $errors['email']; ?></p>
+                    </div>
+                <?php endif; ?>
+                <div class="input-field">
+                    <input type="password" class="password" name="password" placeholder="Enter your password">
+                    <i class="uil uil-lock icon"></i>
+                    <i class="uil uil-eye-slash showHidePW"></i>
+                </div>
+                <?php if(isset($errors['password'])): ?>
+                    <div class="message">
+                        <p class="error"><?= $errors['password']; ?></p>
+                    </div>
+                <?php endif; ?>
+                <div class="input-field">
+                    <input type="password" class="password" name="passwordConfirm" placeholder="Confirm your password">
+                    <i class="uil uil-lock icon"></i>
+                    <i class="uil uil-eye-slash showHidePW"></i>
+                </div>
+                <?php if(isset($errors['confirm_password'])): ?>
+                    <div class="message">
+                        <p class="error"><?= $errors['confirm_password']; ?></p>
+                    </div>
+                <?php endif; ?>
 
-                    if (isset($_GET['lastName'])) {
-                        echo    '<div class="input-field">
-                                <input type="text" name="lastName" placeholder="Last Name" value=' . $_GET['lastName'] . '>
-                                <i class="uil uil-user"></i>
-                            </div>';
-                    } else {
-                        echo    '<div class="input-field">
-                                <input type="text" name="lastName" placeholder="Last Name" > 
-                                <i class="uil uil-user"></i>
-                            </div>';
-                    }
-                    ?>
-                    <div class="input-field">
-                        <input type="text" name="email" placeholder="Enter your email adress">
-                        <i class="uil uil-envelope"></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" class="password" name="password" placeholder="Enter your password">
-                        <i class="uil uil-lock icon"></i>
-                        <i class="uil uil-eye-slash showHidePW"></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" class="password" name="passwordConfirm" placeholder="Confirm your password">
-                        <i class="uil uil-lock icon"></i>
-                        <i class="uil uil-eye-slash showHidePW"></i>
-                    </div>
-
-                    <div class="input-field button">
-                        <input type="submit" name="submit" value="Register">
-                    </div>
-                </form>
-                <div class="login-signup">
+                <div class="input-field button">
+                    <input type="submit" name="submit" value="Register">
+                </div>
+            </form>
+            <div class="login-signup">
                     <span class="text">Do you have an account?
                         <a href="login.php" class="text login-link"> LogIn Now</a>
                     </span><br>
-                    <span class="text"><a href="index.php" class="text">Go to Home</a></span>
-                </div>
-                <script src="passShowHide.js"></script>
-                <?php
-                if (!isset($_GET['signup'])) {
-                    exit();
-                } else {
-                    $signupCheck = $_GET['signup'];
-                    if ($signupCheck === "empty") {
-                        echo '
-                        <div class=message>
-                        <p class="error">The inputs is required <i class="uil uil-times-circle"></i></p>  
-                        </div>
-                        ';
-                        exit();
-                    } elseif ($signupCheck === "char") {
-                        echo '
-                        <div class=message>
-                        <p class="error">The first or last name is invalid.  <i class="uil uil-times-circle"></i></p> 
-                        </div>
-                        ';
-                        exit();
-                    } elseif ($signupCheck === "email") {
-                        echo '
-                        <div class=message>
-                        <p class="error">The email is invalid. <i class="uil uil-times-circle"></i></p>  
-                        </div>
-                        ';
-                        exit();
-                    } elseif ($signupCheck === "passwordNoMatches") {
-                        echo '
-                        <div class=message>
-                        <p class="error">Passwords do not match.<i class="uil uil-times-circle"></i></p> 
-                        </div>
-                        ';
-                        exit();
-                    } elseif ($signupCheck === "alreadyExists") {
-                        echo '
-                        <div class=message>
-                        <p class="error">This account already exists! <i class="uil uil-times-circle"></i></i></p>  
-                        </div>
-                        ';
-                        exit();
-                    } elseif ($signupCheck === "succes") {
-                        echo '
-                        <div class=message>
-                        <p class="succes">You have successfully created your account! <i class="uil uil-check-circle"></i></p>  
-                        </div>
-                        ';
-                        exit();
-                    }
-                }
-                ?>
+                <span class="text"><a href="index.php" class="text">Go to Home</a></span>
             </div>
         </div>
     </div>
+</div>
+<script src="passShowHide.js"></script>
 </body>
-
 </html>
+
