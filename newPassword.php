@@ -1,5 +1,4 @@
 <?php
-require_once("connect.php");
 require_once("configNewPassword.php");
 ?>
 
@@ -15,16 +14,19 @@ require_once("configNewPassword.php");
 </head>
 
 <body>
-
     <div class="container">
         <div class="forms">
+            <?php if($error): ?>
+                <div class="error"><?= $error_message; ?></div>
+            <?php else: ?>
             <div class="form login">
                 <span class="title">Reset Your Password</span>
                 <form action="" method="POST">
-                        <div class="messageDb">
-                        <?php if (isset($message['error'])) : ?>
-                            <p><?= $message['error'] ?></p>
-                        </div>
+                    <input type="hidden" name="token" value="<?= $_GET['token']; ?>">
+                    <div class="messageDb">
+                    <?php if (isset($message['error'])) : ?>
+                        <p><?= $message['error'] ?></p>
+                    </div>
                     <?php endif; ?>
                     <div class="input-field">
                         <input type="password" name="newPassword" placeholder="Enter your new password">
@@ -42,6 +44,7 @@ require_once("configNewPassword.php");
                     <span class="text"><a href="index.php" class="text">Go to Home</a></span>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 

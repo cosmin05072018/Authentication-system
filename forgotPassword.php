@@ -1,5 +1,4 @@
 <?php
-require_once("connect.php");
 require_once("verifyEmail.php");
 ?>
 
@@ -17,6 +16,11 @@ require_once("verifyEmail.php");
 <body>
 
     <div class="container">
+    <?php if ($success) : ?>
+        <div class="errors">
+            <p>Am trimis un email de recuperare pe adresa mentionata. Te rugam sa verifici si in SPAM.</p>
+        </div>
+    <?php else: ?>
         <div class="forms">
             <div class="form login">
                 <span class="title">Forgot Your Password</span>
@@ -30,6 +34,11 @@ require_once("verifyEmail.php");
                         <input type="text" name="email" placeholder="Enter your email adress">
                         <i class="uil uil-envelope"></i>
                     </div>
+                    <?php if (isset($message['error_mail'])) : ?>
+                        <div class="errors">
+                            <p><?= $message['error_mail'] ?></p>
+                        </div>
+                    <?php endif; ?>
                     <div class="input-field button">
                         <input type="submit" name="forgot_password" value="Submit">
                     </div>
@@ -39,6 +48,7 @@ require_once("verifyEmail.php");
                 </div>
             </div>
         </div>
+    <?php endif; ?>
     </div>
 
 </body>

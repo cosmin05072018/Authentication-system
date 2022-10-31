@@ -1,5 +1,4 @@
 <?php
-require_once("connect.php");
 require_once("verificationCheckCode.php");
 ?>
 
@@ -23,8 +22,7 @@ require_once("verificationCheckCode.php");
                 <form action="" method="POST">
                     <?php if (isset($message['code'])) : ?>
                         <div class="errors">
-                            <p><?= $message['code'];
-                                ?></p>
+                            <p><?= $message['code']; ?></p>
                         </div>
                     <?php endif; ?>
                     <div class="input-field">
