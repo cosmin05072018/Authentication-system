@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>HomePage</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -17,7 +17,6 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a href="index.php" class="navbar-brand">Brand<b>Name</b></a>
-        <a href="addProducts.php" class="navbar-brand">Add Products</a>
         <?php
         $user = isset($_SESSION['user']) ? $_SESSION['user'] : '';
         if (!$user) { ?>
@@ -30,16 +29,18 @@
                     <a href="login.php" class="btn btn-primary sign-up-btn">Log In</a>
                 </div>
             </div>
-        <?php } else {?>
+        <?php } else { ?>
             <div class="navbar-nav ml-auto action-buttons">
-                <p class="nav-item nav-link">Hello, <?= $user['last_name']; ?></p>
-                <a href="cart.php"><i class="uil uil-shopping-cart-alt"></i></a>
+                <p class="nav-item nav-link">Shopping Cart</p>
+                <p class="nav-item nav-link"><a href="index.php">Back to Home</a></p>
                 <a href="logout.php" class="logout-btn">Logout</a>
             </div>
         <?php } ?>
         </div>
     </nav>
-
+    <div class="empty">
+        <h1 class="emptyCart">Your Cart is Empty</h1>   
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>

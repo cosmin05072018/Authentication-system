@@ -175,3 +175,13 @@ body {
 	position: relative;
 	top: 1px;
 }
+
+.emptyCart{
+	margin-top: 120px;
+	font-weight: 800;
+}
+
+.empty{
+	display: flex;
+	justify-content: center;
+}
