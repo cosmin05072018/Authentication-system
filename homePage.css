@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&family=Poppins:wght@300;400;500;600;700&display=swap");
 
+*{
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
 body {
   font-family: "Poppins", sans-serif;
 }
@@ -184,4 +189,13 @@ body {
 .empty{
 	display: flex;
 	justify-content: center;
+}
+
+.products{
+	margin: 10px ;
+}
+
+.messageCart{
+	text-align: center;
+	margin-top: 200px;
 }

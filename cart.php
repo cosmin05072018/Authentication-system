@@ -1,4 +1,7 @@
-<?php require_once 'checkSession.php'; ?>
+<?php 
+require_once 'checkSession.php'; 
+$query = $db->query("SELECT * FROM products");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,9 +41,38 @@
         <?php } ?>
         </div>
     </nav>
-    <div class="empty">
-        <h1 class="emptyCart">Your Cart is Empty</h1>   
+    <?php if($query->num_rows): ?>
+        <div class="products">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <?php while ($row = $query->fetch_assoc()) { ?>
+                    <tr>
+                        <td scope="row"><?= $row['id'] ?></td>
+                        <td scope="row"><?= $row['nameProduct'] ?></td>
+                        <td scope="row"><?= $row['quantityProduct'] ?></td>
+                        <td scope="row"><?= $row['descriptionProduct'] ?></td>
+                        <td scope="row"><?= $row['priceProduct'] ?></td>
+                        <td scope="row"><i class="uil uil-atom"></i></td>
+                        <td scope="row"><i class="uil uil-trash-alt"></i></td>
+                    </tr>
+                <?php }; ?>
+            </table>
+        </div>
+    <?php else : ?>
+    <div class="messageCart">
+        <h1>Your Cart is Empty</h1>   
     </div>
+    <?php endif;?>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
