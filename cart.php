@@ -65,7 +65,7 @@ $query = $db->query("SELECT * FROM products");
                         <td scope="row"><i class="uil uil-atom"></i></td>
                         <td scope="row"><i class="uil uil-trash-alt"></i></td>
                     </tr>
-                <?php }; ?>
+                <?php };?>
             </table>
         </div>
     <?php else : ?>

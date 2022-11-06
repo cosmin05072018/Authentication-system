@@ -51,7 +51,7 @@ $query = $db->query("SELECT * FROM products");
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Quantity</th>
+                        <th scope="col">Stock</th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
                         <?php if (isset($_SESSION['user'])) : ?>
@@ -67,10 +67,20 @@ $query = $db->query("SELECT * FROM products");
                         <td scope="row"><?= $row['descriptionProduct'] ?></td>
                         <td scope="row"><?= $row['priceProduct'] ?></td>
                         <?php if (isset($_SESSION['user'])) : ?>
-                            <td scope="row"><a href=<?= 'addToCart.php?id=' . $row['id'] ?>>Add to cart</a></td>
+                            <td scope="row">
+                                <form action="addToCart.php" method="POST">
+                                    <input type="text" name="id" value="<?= $row['id']?>">
+                                    <input type="submit" name="submit" value="Add to cart">
+                                </form>
+                            </td>
                         <?php endif; ?>
                     </tr>
-                <?php }; ?>
+                <?php };
+                
+                echo '<pre>';
+                print_r($_POST);
+               
+                ?>
             </table>
         </div>
     <?php else : ?>
