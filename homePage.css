@@ -199,3 +199,9 @@ body {
 	text-align: center;
 	margin-top: 200px;
 }
+
+.errors{
+	font-size: 100px;
+	font-weight: 800;
+	color: black;
+}

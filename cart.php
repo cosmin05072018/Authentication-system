@@ -59,7 +59,7 @@ $query = $db->query("SELECT * FROM products");
                     <tr>
                         <td scope="row"><?= $row['id'] ?></td>
                         <td scope="row"><?= $row['nameProduct'] ?></td>
-                        <td scope="row"><?= $row['quantityProduct'] ?></td>
+                        <td scope="row"><input type="submit" value="-"><?= $row['quantityProduct'] ?><input type="submit" value="+"></td>
                         <td scope="row"><?= $row['descriptionProduct'] ?></td>
                         <td scope="row"><?= $row['priceProduct'] ?></td>
                         <td scope="row"><i class="uil uil-atom"></i></td>

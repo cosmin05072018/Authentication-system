@@ -1,5 +1,6 @@
 <?php
-require_once 'checkSession.php';
+require_once ('addToCart.php');
+require_once ('dataProducts.php');
 $query = $db->query("SELECT * FROM products");
 ?>
 <!DOCTYPE html>
@@ -43,9 +44,11 @@ $query = $db->query("SELECT * FROM products");
         <?php } ?>
         </div>
     </nav>
-
+    
     <?php if ($query->num_rows) : ?>
         <div class="products">
+            
+        <?= isset($errorStock['status']) ? $errorStock['status'] : '' ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -68,19 +71,14 @@ $query = $db->query("SELECT * FROM products");
                         <td scope="row"><?= $row['priceProduct'] ?></td>
                         <?php if (isset($_SESSION['user'])) : ?>
                             <td scope="row">
-                                <form action="addToCart.php" method="POST">
-                                    <input type="text" name="id" value="<?= $row['id']?>">
+                                <form method="POST">
+                                    <input type="hidden" name="id" value="<?= $row['id'] ?? null; ?>">
                                     <input type="submit" name="submit" value="Add to cart">
                                 </form>
                             </td>
                         <?php endif; ?>
                     </tr>
-                <?php };
-                
-                echo '<pre>';
-                print_r($_POST);
-               
-                ?>
+                <?php }; ?>
             </table>
         </div>
     <?php else : ?>
