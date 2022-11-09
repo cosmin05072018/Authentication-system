@@ -3,7 +3,7 @@ require_once("connect.php");
 require_once("dataProducts.php");
 session_start();
 $errorStock = [];
-if (isset($_SESSION['user'])) {
+// if (isset($_SESSION['user'])) {
     if (isset($_POST['submit']) && $_POST['submit']) {
         if (isset($_POST['id']) && $_POST['id']) {
             $product_id = $_POST ?? null;  //tine id-ul produselor din tabela products
@@ -35,4 +35,4 @@ if (isset($_SESSION['user'])) {
             $error['message'] = 'ID wrong';
         }
     }
-}
+//}

@@ -1,0 +1,5 @@
+$cartsTable = $db->query("SELECT * FROM carts");
+$cart=$cartsTable->fetch_assoc();
+
+$productsTable = $db->query("SELECT * FROM products WHERE id = '".$db->real_escape_string($cart['product_id'])."'");
+$product = $productsTable->fetch_assoc();
