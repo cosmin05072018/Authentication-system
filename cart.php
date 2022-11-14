@@ -1,7 +1,12 @@
 <?php
 require_once 'checkSession.php';
-require_once('buttonsCart.php');
-$cartsTable = $db->query("SELECT products.id, products.nameProduct, products.descriptionProduct, carts.product_id, carts.quantity, carts.unit_price FROM carts LEFT JOIN `products` ON carts.product_id =products.id");
+require_once('updateCart.php');
+if (isset($_SESSION['user']['id']) && $_SESSION['user']['id']) {
+    $cartsTable = $db->query("SELECT products.id, products.nameProduct, carts.quantity, carts.unit_price, carts.user_id 
+    FROM carts 
+    LEFT JOIN `products` ON carts.product_id =products.id 
+    WHERE carts.user_id ='" . $db->real_escape_string($_SESSION['user']['id']) . "'");
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,40 +48,50 @@ $cartsTable = $db->query("SELECT products.id, products.nameProduct, products.des
         <?php } ?>
         </div>
     </nav>
+    <?= isset($errorStock['status']) ? $errorStock['status'] : '' ?>
     <?php if ($cartsTable->num_rows) : ?>
-        <div class="products">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Update</th>
-                        <th scope="col">Delete</th>
-                    </tr>
-                </thead>
-                <?php while ($cart = $cartsTable->fetch_assoc()) { ?>
-                    <tr>
-                        <td scope="row"><?= $cart['id'] ?></td>
-                        <td scope="row"><?= $cart['nameProduct'] ?></td>
-                        <td scope="row">
-                            <form method="POST">
-                            <input type="hidden" name="id" value="<?= $cart['id'] ?? null; ?>">
-                                <input name='decrement' type="submit" value="-">
-                            <?= $cart['quantity'] ?>
-                                <input name='increment' type="submit" value="+">
-                            </form>
-                        </td>
-                        <td scope="row"><?= $cart['descriptionProduct'] ?></td>
-                        <td scope="row"><?= $cart['unit_price'] ?></td>
-                        <td scope="row"><i class="uil uil-atom"></i></td>
-                        <td scope="row"><i class="uil uil-trash-alt"></i></td>
-                    </tr>
-                <?php }; ?>
-            </table>
-        </div>
+        <form method="POST">
+            <div class="products">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">unit Price</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <?php
+                    $num = 0;
+                    while ($cart = $cartsTable->fetch_assoc()) {
+                    ?>
+                        <tr class="product-row" data-productId="<?= $cart['id'] ?>">
+                            <td scope="row"><?= $cart['id'] ?></td>
+                            <td scope="row"><?= $cart['nameProduct'] ?></td>
+                            <td scope="row">
+                                <input type="hidden" name="products[<?= $num; ?>][id]" value="<?= $cart['id'] ?? null; ?>">
+                                <input type="number" min="1" name="products[<?= $num; ?>][quantity]" value="<?= $cart['quantity'] ?? 1; ?>">
+                                <?php if(isset($error[$cart['id']]['message']) && $error[$cart['id']]['message']): ?>
+                                        <p><?= $error[$cart['id']]['message']; ?></p>
+                                    <?php endif; ?>
+                            </td>
+                            <td scope="row"><?= number_format($cart['unit_price'], 2, '.', '') ?></td>
+                            <td scope="row"><?= number_format($cart['unit_price']*$cart['quantity'], 2, '.', '') ?></td>
+                            <td scope="row">
+                               <div class="delete-product" data-id="<?= $cart['id']; ?> "><i class="uil uil-trash-alt"></i></div>
+                            </td>
+
+                        </tr>
+                    <?php $num++;
+                    };
+                    ?>
+                </table>
+                <input type="submit" value="Update" name="update">
+            </div>
+        </form>
+
     <?php else : ?>
         <div class="messageCart">
             <h1>Your Cart is Empty</h1>
@@ -85,6 +100,25 @@ $cartsTable = $db->query("SELECT products.id, products.nameProduct, products.des
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+       $('body').on('click', '.delete-product', function() {
+        const id = $(this).attr('data-id');
+        
+        if(id) {
+            $.ajax({
+                url: "deleteFromCart.php",
+                type: "POST",
+                data: {product_id: id, user_id: <?= $_SESSION['user']['id']; ?>},
+                dataType: "json",
+                success: function(data) {
+                        if(data.success){
+                            $(`tr.product-row[data-productId=${id}]`).remove();
+                        }
+                }
+            })
+        }
+       })
+    </script>
 </body>
 
 </html>
