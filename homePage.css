@@ -200,3 +200,31 @@ body {
 	margin-top: 200px;
 }
 
+.update{
+	text-align: center;
+}
+
+.placeOrder{
+	padding-top: 20px;
+	text-align: center;
+	margin-top: 50px;
+	border-top: 0.5px solid #38383880;
+}
+
+.inputPlaceOrder, .inputUpdate{
+	color: #fff;
+	background-color: #393939;
+	border: none;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.inputPlaceOrder:hover, .inputUpdate:hover{
+	background-color: #fff;
+	color: #393939;
+	border: 1px solid #393939;
+}
+
+.totalPrice{
+	float: right;
+}

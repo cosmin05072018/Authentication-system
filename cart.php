@@ -1,11 +1,17 @@
 <?php
-require_once 'checkSession.php';
+require_once ('checkSession.php');
 require_once('updateCart.php');
+require_once('placeOrders.php');
 if (isset($_SESSION['user']['id']) && $_SESSION['user']['id']) {
     $cartsTable = $db->query("SELECT products.id, products.nameProduct, carts.quantity, carts.unit_price, carts.user_id 
     FROM carts 
     LEFT JOIN `products` ON carts.product_id =products.id 
     WHERE carts.user_id ='" . $db->real_escape_string($_SESSION['user']['id']) . "'");
+    $totalPrice = $db->query("SELECT SUM(unit_price * quantity) 
+    FROM carts
+    WHERE carts.user_id ='" . $db->real_escape_string($_SESSION['user']['id']) . "'
+    ");
+    $row = $totalPrice->fetch_assoc();
 }
 ?>
 
@@ -73,14 +79,14 @@ if (isset($_SESSION['user']['id']) && $_SESSION['user']['id']) {
                             <td scope="row">
                                 <input type="hidden" name="products[<?= $num; ?>][id]" value="<?= $cart['id'] ?? null; ?>">
                                 <input type="number" min="1" name="products[<?= $num; ?>][quantity]" value="<?= $cart['quantity'] ?? 1; ?>">
-                                <?php if(isset($error[$cart['id']]['message']) && $error[$cart['id']]['message']): ?>
-                                        <p><?= $error[$cart['id']]['message']; ?></p>
-                                    <?php endif; ?>
+                                <?php if (isset($error[$cart['id']]['message']) && $error[$cart['id']]['message']) : ?>
+                                    <p><?= $error[$cart['id']]['message']; ?></p>
+                                <?php endif; ?>
                             </td>
-                            <td scope="row"><?= number_format($cart['unit_price'], 2, '.', '') ?></td>
-                            <td scope="row"><?= number_format($cart['unit_price']*$cart['quantity'], 2, '.', '') ?></td>
+                            <td scope="row"><?= number_format($cart['unit_price'], 2, '.', '') ?> $</td>
+                            <td scope="row"><?= number_format($cart['unit_price'] * $cart['quantity'], 2, '.', '') ?> $</td>
                             <td scope="row">
-                               <div class="delete-product" data-id="<?= $cart['id']; ?> "><i class="uil uil-trash-alt"></i></div>
+                                <div class="delete-product" data-id="<?= $cart['id']; ?> "><i class="uil uil-trash-alt"></i></div>
                             </td>
 
                         </tr>
@@ -88,7 +94,17 @@ if (isset($_SESSION['user']['id']) && $_SESSION['user']['id']) {
                     };
                     ?>
                 </table>
-                <input type="submit" value="Update" name="update">
+                <div class="update">
+                    <input type="submit" value="Update Cart" name="update" class="inputUpdate">
+                </div>
+                <div class="totalPrice">
+                    <h3>Total price: <?php foreach ($row as $rows) {echo $rows;} ?> $</h3>
+                </div>
+                <br>
+                <div class="placeOrder">
+                    <input type="submit" value="Place Order" name="placeOrder" class="inputPlaceOrder">
+                </div>
+
             </div>
         </form>
 
@@ -101,23 +117,27 @@ if (isset($_SESSION['user']['id']) && $_SESSION['user']['id']) {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script>
-       $('body').on('click', '.delete-product', function() {
-        const id = $(this).attr('data-id');
-        
-        if(id) {
-            $.ajax({
-                url: "deleteFromCart.php",
-                type: "POST",
-                data: {product_id: id, user_id: <?= $_SESSION['user']['id']; ?>},
-                dataType: "json",
-                success: function(data) {
-                        if(data.success){
+        $('body').on('click', '.delete-product', function() {
+            const id = $(this).attr('data-id');
+
+            if (id) {
+                $.ajax({
+                    url: "deleteFromCart.php",
+                    type: "POST",
+                    data: {
+                        product_id: id,
+                        user_id: <?= $_SESSION['user']['id']; ?>
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        if (data.success) {
                             $(`tr.product-row[data-productId=${id}]`).remove();
+                            window.location.reload();
                         }
-                }
-            })
-        }
-       })
+                    }
+                })
+            }
+        })
     </script>
 </body>
 
