@@ -11,15 +11,19 @@ if (isset($_POST['placeOrder']) && $_POST['placeOrder'] && isset($_SESSION['user
         foreach ($row as $rows);
     $ordersTable = $db->query("SELECT * FROM orders WHERE user_id= '".$db->real_escape_string($_SESSION['user']['id'])."' ");
     $orders = $ordersTable->fetch_assoc();
+    $time = date('Y-m-d H:i:s');
     if ($ordersTable->num_rows) {
         $db->query("UPDATE orders SET
-        total_value = '" . $rows . "'
+        total_value = '" . $rows . "',
+        created_at= '".$time."'
         WHERE user_id = '" . $db->real_escape_string($_SESSION['user']['id'])."'
         ");
     } else {
         $db->query("INSERT INTO orders SET    
         user_id ='" . $_SESSION['user']['id'] . "',
-        total_value = '" . $rows . "'
+        total_value = '" . $rows . "',
+        created_at= '".$time."'
         ");
     }
 }
+

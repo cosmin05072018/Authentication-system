@@ -142,3 +142,11 @@ if (isset($_SESSION['user']['id']) && $_SESSION['user']['id']) {
 </body>
 
 </html>
+
+<?php 
+
+$date = date("d/m/Y");
+print_r($date);
+
+
+?>
